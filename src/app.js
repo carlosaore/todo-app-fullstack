@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const path = require('path')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.get('/api', (req, res) => {
+app.get('/api', cors(), (req, res) => {
     const retro = [
         {id: 1, text: 'This went well, etc.', upVotes: 3, downVotes: 0},
         {id: 2, text: 'Yes and no.', upVotes: 4, downVotes: 3},
