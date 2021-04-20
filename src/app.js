@@ -6,14 +6,74 @@ const path = require('path')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', cors(), (req, res) => {
+    res.status(200).json({"message" : "Server is up and running"});
+});
 
 app.get('/api', cors(), (req, res) => {
-    const retro = [
-        {id: 1, text: 'This went well, etc.', upVotes: 3, downVotes: 0},
-        {id: 2, text: 'Yes and no.', upVotes: 4, downVotes: 3},
-        {id: 3, text: 'Nothing went well, etc.', upVotes: 1, downVotes: 0},
-    ];
-    res.status(201).json(retro);
+    const retro = {
+
+        wentWell: [
+            {
+                id: 1,
+                text: 'This went well, etc.',
+                upVotes: 3,
+                downVotes: 0,
+                comments: [
+                    "one comment",
+                    "another comment"
+                ]
+            },
+        ],
+
+        toImprove: [
+            {
+                id: 1,
+                text: 'Yes and no.',
+                upVotes: 4,
+                downVotes: 3,
+                comments: [
+                    "one comment",
+                    "another comment",
+                    "another one"
+                ]
+            },
+            {
+                id: 2,
+                text: 'Nothing went well, etc.',
+                upVotes: 1,
+                downVotes: 0,
+                comments: [
+                    "Only one comment"
+                ]
+            },
+        ],
+
+        actionItems: [
+            {
+                id: 1,
+                text: 'Let\'s try something else.',
+                upVotes: 3,
+                downVotes: 0,
+                comments: []
+            },
+            {
+                id: 2,
+                text: 'More quests.',
+                upVotes: 4,
+                downVotes: 3,
+                comments: []
+            },
+            {
+                id: 3,
+                text: 'More hackathons.',
+                upVotes: 1,
+                downVotes: 0,
+                comments: []
+            },
+        ],
+    };
+    res.status(200).json(retro);
 });
 
 //Serve static assets if in production
