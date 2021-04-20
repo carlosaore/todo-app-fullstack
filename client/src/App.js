@@ -1,15 +1,30 @@
-function App() {
+import { useState, useEffect } from "react";
+import Navbar from "./components/navbar";
+import Main from "./components/main";
+import Footer from "./components/footer";
 
-    function callApi() {
-        fetch("http://localhost:5000/api")
-            .then(response => response.json()).then(data => console.log(data));
+function App() {
+    const [boardItems, setBoardItems] = useState(false);
+
+    function getData() {
+        fetch("/api")
+            .then(response => response.json())
+            .then(data => setBoardItems(data))
     }
 
+    useEffect (() => {
+        getData();
+    }, []);
+
     return (
-        <div>
-            <h1>To Do</h1>
-            <button onClick={callApi}>click me</button>
-        </div>
+        <>
+            <Navbar />
+            <Main
+                boardItems={boardItems}
+                setBoardItems={setBoardItems}
+            />
+            <Footer />
+        </>
     );
 }
 
