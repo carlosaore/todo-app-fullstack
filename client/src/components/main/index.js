@@ -64,19 +64,19 @@ const Main = (props) => {
 						<Item key={uuidv4()}>
 							<p>{element.text}</p>
 							<Button
-								onClick={(e) => handleLike(e)}
+								onClick={handleLike}
 								value={element.id}
 							>
 								{`👍${element.upVotes}`}
 							</Button>
 							<Button
-								onClick={(e) => handleUnlike(e)}
+								onClick={handleUnlike}
 								value={element.id}
 							>{`👎${element.downVotes}`}</Button>
 							{element.comments.length === 0
 								? ""
 								: <Button
-									onClick={(e) => handleShowCommentsClick(e)}
+									onClick={handleShowCommentsClick}
 									value={element.id}
 								>
 									{`💬${element.comments.length}`}
@@ -94,19 +94,19 @@ const Main = (props) => {
 						<Item key={uuidv4()}>
 							<p>{element.text}</p>
 							<Button
-								onClick={(e) => handleLike(e)}
+								onClick={handleLike}
 								value={element.id}
 							>
 								{`👍${element.upVotes}`}
 							</Button>
 							<Button
-								onClick={(e) => handleUnlike(e)}
+								onClick={handleUnlike}
 								value={element.id}
 							>{`👎${element.downVotes}`}</Button>
 							{element.comments.length === 0
 								? ""
 								: <Button
-									onClick={(e) => handleShowCommentsClick(e)}
+									onClick={handleShowCommentsClick}
 									value={element.id}
 								>
 									{`💬${element.comments.length}`}
@@ -124,19 +124,19 @@ const Main = (props) => {
 						<Item key={uuidv4()}>
 							<p>{element.text}</p>
 							<Button
-								onClick={(e) => handleLike(e)}
+								onClick={handleLike}
 								value={element.id}
 							>
 								{`👍${element.upVotes}`}
 							</Button>
 							<Button
-								onClick={(e) => handleUnlike(e)}
+								onClick={handleUnlike}
 								value={element.id}
 							>{`👎${element.downVotes}`}</Button>
 							{element.comments.length === 0
 								? ""
 								: <Button
-									onClick={(e) => handleShowCommentsClick(e)}
+									onClick={handleShowCommentsClick}
 									value={element.id}
 								>
 									{`💬${element.comments.length}`}

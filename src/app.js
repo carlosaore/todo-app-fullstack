@@ -6,10 +6,6 @@ const path = require('path')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', cors(), (req, res) => {
-    res.status(200).json({"message" : "Server is up and running"});
-});
-
 app.get('/api', cors(), (req, res) => {
     const retro = {
 
