@@ -1,75 +1,55 @@
 const express = require('express');
+const connection = require('./conf')
 const app = express();
 const cors = require('cors');
 const path = require('path')
 
+// global middleware
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+// Allow cors policies
+app.use(cors())
+
+connection.connect((err)=>{
+    if(err) {
+        console.error(`Error trying to reach the DB. Error: ${err.stack}`)
+        return;
+    }
+    console.log('Successfully connected to the DB')
+})
 
 app.get('/api', cors(), (req, res) => {
-    const retro = {
 
-        wentWell: [
-            {
-                id: 1,
-                text: 'This went well, etc.',
-                upVotes: 3,
-                downVotes: 0,
-                comments: [
-                    "one comment",
-                    "another comment"
-                ]
-            },
-        ],
+    const boardData = {};
 
-        toImprove: [
-            {
-                id: 1,
-                text: 'Yes and no.',
-                upVotes: 4,
-                downVotes: 3,
-                comments: [
-                    "one comment",
-                    "another comment",
-                    "another one"
-                ]
-            },
-            {
-                id: 2,
-                text: 'Nothing went well, etc.',
-                upVotes: 1,
-                downVotes: 0,
-                comments: [
-                    "Only one comment"
-                ]
-            },
-        ],
+    connection.query('SELECT * FROM went_well', (err, data) => {
+        if(err) {
+            res.status(500).send('Server error, could not fetch from DB');
+        }
+        else {
+            boardData['wentWell'] = data;
+        }
+    });
 
-        actionItems: [
-            {
-                id: 1,
-                text: 'Let\'s try something else.',
-                upVotes: 3,
-                downVotes: 0,
-                comments: []
-            },
-            {
-                id: 2,
-                text: 'More quests.',
-                upVotes: 4,
-                downVotes: 3,
-                comments: []
-            },
-            {
-                id: 3,
-                text: 'More hackathons.',
-                upVotes: 1,
-                downVotes: 0,
-                comments: []
-            },
-        ],
-    };
-    res.status(200).json(retro);
+    connection.query('SELECT * FROM to_improve', (err, data) => {
+        if(err) {
+            res.status(500).send('Server error, could not fetch from DB');
+        }
+        else {
+            boardData['toImprove'] = data;
+        }
+    });
+
+    connection.query('SELECT * FROM action_items', (err, data) => {
+        if(err) {
+            res.status(500).send('Server error, could not fetch from DB');
+        }
+        else {
+            boardData['actionItems'] = data;
+            res.status(200).json(boardData)
+        }
+    });
 });
 
 //Serve static assets if in production

@@ -8,6 +8,7 @@
     "start": "node src/index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"nodemon src/index.jsr\" \"npm start --prefix client\"",
+    "dev-api": "nodemon src/index.jsr",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client && npm run build --prefix client"
   },
@@ -16,7 +17,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

@@ -51,10 +51,6 @@ const Main = (props) => {
 		console.log("unlike! " + e.target.value)
 	}
 
-	const handleShowCommentsClick = (e) => {
-		console.log("comment! " + e.target.value)
-	}
-
 	return (
 		<MainWrapper>
 			<Column>
@@ -67,21 +63,12 @@ const Main = (props) => {
 								onClick={handleLike}
 								value={element.id}
 							>
-								{`👍${element.upVotes}`}
+								{`👍${element.likes}`}
 							</Button>
 							<Button
 								onClick={handleUnlike}
 								value={element.id}
-							>{`👎${element.downVotes}`}</Button>
-							{element.comments.length === 0
-								? ""
-								: <Button
-									onClick={handleShowCommentsClick}
-									value={element.id}
-								>
-									{`💬${element.comments.length}`}
-								</Button>
-							}
+							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
 					: <p>loading...</p>
@@ -97,21 +84,12 @@ const Main = (props) => {
 								onClick={handleLike}
 								value={element.id}
 							>
-								{`👍${element.upVotes}`}
+								{`👍${element.likes}`}
 							</Button>
 							<Button
 								onClick={handleUnlike}
 								value={element.id}
-							>{`👎${element.downVotes}`}</Button>
-							{element.comments.length === 0
-								? ""
-								: <Button
-									onClick={handleShowCommentsClick}
-									value={element.id}
-								>
-									{`💬${element.comments.length}`}
-								</Button>
-							}
+							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
 					: <p>loading...</p>
@@ -127,21 +105,12 @@ const Main = (props) => {
 								onClick={handleLike}
 								value={element.id}
 							>
-								{`👍${element.upVotes}`}
+								{`👍${element.likes}`}
 							</Button>
 							<Button
 								onClick={handleUnlike}
 								value={element.id}
-							>{`👎${element.downVotes}`}</Button>
-							{element.comments.length === 0
-								? ""
-								: <Button
-									onClick={handleShowCommentsClick}
-									value={element.id}
-								>
-									{`💬${element.comments.length}`}
-								</Button>
-							}
+							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
 					: <p>loading...</p>
