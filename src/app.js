@@ -35,6 +35,7 @@ app.get('/api', cors(), (req, res) => {
 
     connection.query('SELECT * FROM went_well', (err, data) => {
         if(err) {
+            console.error(err);
             res.status(500).send('Server error, could not fetch from DB');
         }
         else {
@@ -44,6 +45,7 @@ app.get('/api', cors(), (req, res) => {
 
     connection.query('SELECT * FROM to_improve', (err, data) => {
         if(err) {
+            console.error(err);
             res.status(500).send('Server error, could not fetch from DB');
         }
         else {
@@ -53,6 +55,7 @@ app.get('/api', cors(), (req, res) => {
 
     connection.query('SELECT * FROM action_items', (err, data) => {
         if(err) {
+            console.error(err);
             res.status(500).send('Server error, could not fetch from DB');
         }
         else {
