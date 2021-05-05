@@ -7,7 +7,7 @@ function App() {
     const [boardItems, setBoardItems] = useState(false);
 
     function getData() {
-        fetch("/api")
+        fetch("/api/board")
             .then(response => response.json())
             .then(data => setBoardItems(data))
     }
