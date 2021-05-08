@@ -7,10 +7,23 @@ const NavbarWrapper = styled.nav`
   display: flex;
 `
 
-const Navbar = () => (
-    <NavbarWrapper>
-        <p>This is the navbar</p>
-    </NavbarWrapper>
-);
+const Navbar = (props) => {
+
+    const handleResetBoard = () => {
+        fetch(`/api/board/reset`, {
+            method: 'PUT',
+        }).then(res => res.json())
+        .then(res => console.log(res))
+        .catch(error => console.error(error))
+        .then(props.getData());
+    };
+
+    return (
+        <NavbarWrapper>
+            <p>This is the navbar</p>
+            <button onClick={handleResetBoard}>Reset board (warning: no take-backsies)</button>
+        </NavbarWrapper>
+    )
+};
 
 export default Navbar;

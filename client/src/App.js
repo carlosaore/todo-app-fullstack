@@ -9,7 +9,9 @@ function App() {
     function getData() {
         fetch("/api/board")
             .then(response => response.json())
-            .then(data => setBoardItems(data))
+            .then(data => {
+                setBoardItems(data)
+            })
     }
 
     useEffect (() => {
@@ -18,10 +20,13 @@ function App() {
 
     return (
         <>
-            <Navbar />
+            <Navbar
+                getData={getData}
+            />
             <Main
                 boardItems={boardItems}
                 setBoardItems={setBoardItems}
+                getData={getData}
             />
             <Footer />
         </>

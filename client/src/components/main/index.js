@@ -1,14 +1,16 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import LoadingCircle from './LoadingCircle';
+import InputItem from "./InputItem";
 
 const MainWrapper = styled.main`
   width: 95%;
   min-height: 200px;
   margin: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  
-  
 
   @media (min-width: ${props => props.theme.mediumViewport}) {
     width: 85%;
@@ -21,13 +23,16 @@ const MainWrapper = styled.main`
 `
 
 const Column = styled.section`
-  width: 30%;
+  width: 100%;
+
+  @media (min-width: ${props => props.theme.mediumViewport}) {
+    width: 30%;
+  }
 `
 
 const Item = styled.div`
   background: beige;
   margin-bottom: 10px;
-  min-width: 50px;
   font-size: 12px;
 `
 
@@ -42,6 +47,25 @@ const Button = styled.button`
 `
 
 const Main = (props) => {
+	// States
+	const [wentWellNewItem, setWentWellNewItem] = useState("");
+	const [toImproveNewItem, setToImproveNewItem] = useState("");
+	const [actionItemsNewItem, setActionItemsNewItem] = useState("");
+
+	// onChange handlers
+	const handleChangeWentWellNewItem = (e) => {
+		setWentWellNewItem(e.target.value)
+	};
+
+	const handleChangeToImproveNewItem = (e) => {
+		setToImproveNewItem(e.target.value)
+	};
+
+	const handleChangeActionItems = (e) => {
+		setActionItemsNewItem(e.target.value)
+	};
+
+	// Where do we to our API reqs? Here or in the comp?
 
 	const handleLike = (e) => {
 		console.log("like! " + e.target.value)
@@ -71,8 +95,17 @@ const Main = (props) => {
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
-					: <p>loading...</p>
+
+					: <LoadingCircle />
 				}
+				<Item>
+					<InputItem
+						column={"went_well"}
+						newItemValue={wentWellNewItem}
+						handleOnChange={handleChangeWentWellNewItem}
+						getData={props.getData}
+					/>
+				</Item>
 			</Column>
 			<Column>
 				<H3>To improve</H3>
@@ -92,8 +125,16 @@ const Main = (props) => {
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
-					: <p>loading...</p>
+					: <LoadingCircle />
 				}
+				<Item>
+					<InputItem
+						column={"to_improve"}
+						newItemValue={toImproveNewItem}
+						handleOnChange={handleChangeToImproveNewItem}
+						getData={props.getData}
+					/>
+				</Item>
 			</Column>
 			<Column>
 				<H3>Action items</H3>
@@ -113,8 +154,16 @@ const Main = (props) => {
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
-					: <p>loading...</p>
+					: <LoadingCircle />
 				}
+				<Item>
+					<InputItem
+						column={"action_items"}
+						newItemValue={actionItemsNewItem}
+						handleOnChange={handleChangeActionItems}
+						getData={props.getData}
+					/>
+				</Item>
 			</Column>
 		</MainWrapper>
 
