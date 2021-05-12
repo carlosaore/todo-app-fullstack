@@ -67,12 +67,40 @@ const Main = (props) => {
 
 	// Where do we to our API reqs? Here or in the comp?
 
-	const handleLike = (e) => {
-		console.log("like! " + e.target.value)
+	const handleLike = (column, id) => {
+
+		const data = {
+			column : column,
+			id : id
+		}
+
+		fetch(`/api/board/like`, {
+			method: 'PUT',
+			body: JSON.stringify(data),
+			headers:{
+				'Content-Type': 'application/json'
+			}
+		}).then(res => res.json())
+			.catch(error => console.error(error))
+			.then(props.getData());
 	}
 
-	const handleUnlike = (e) => {
-		console.log("unlike! " + e.target.value)
+	const handleUnlike = (column, id) => {
+
+		const data = {
+			column : column,
+			id : id
+		}
+
+		fetch(`/api/board/unlike`, {
+			method: 'PUT',
+			body: JSON.stringify(data),
+			headers:{
+				'Content-Type': 'application/json'
+			}
+		}).then(res => res.json())
+			.catch(error => console.error(error))
+			.then(props.getData());
 	}
 
 	return (
@@ -84,14 +112,12 @@ const Main = (props) => {
 						<Item key={uuidv4()}>
 							<p>{element.text}</p>
 							<Button
-								onClick={handleLike}
-								value={element.id}
+								onClick={() => handleLike( 'went_well', element.idwent_well)}
 							>
 								{`👍${element.likes}`}
 							</Button>
 							<Button
-								onClick={handleUnlike}
-								value={element.id}
+								onClick={() => handleUnlike('went_well', element.idwent_well)}
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
@@ -115,13 +141,14 @@ const Main = (props) => {
 							<p>{element.text}</p>
 							<Button
 								onClick={handleLike}
-								value={element.id}
+								value={element}
 							>
 								{`👍${element.likes}`}
 							</Button>
 							<Button
 								onClick={handleUnlike}
-								value={element.id}
+								value={element}
+
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))
@@ -144,13 +171,13 @@ const Main = (props) => {
 							<p>{element.text}</p>
 							<Button
 								onClick={handleLike}
-								value={element.id}
+								value={element}
 							>
 								{`👍${element.likes}`}
 							</Button>
 							<Button
 								onClick={handleUnlike}
-								value={element.id}
+								value={element}
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
 					))

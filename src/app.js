@@ -212,6 +212,72 @@ app.put('/api/board/reset', cors(), (req, res) => {
 
 });
 
+app.put('/api/board/like', cors(), (req, res) => {
+
+	//Getting a connection from the pool
+	pool.getConnection(function(err, connection) {
+		// Not connected!
+		if (err) console.error(err);
+
+		console.log(req.body);
+		//Using the connection.
+		connection.query(
+			`UPDATE ${req.body.column} SET likes = likes + 1 WHERE id${req.body.column} = ${req.body.id}`,
+			(err) => {
+				if (err) {
+					console.error(err);
+					res.status(500).send("Error");
+				} else {
+					res.status(201).json({"message":"Successfully liked"});
+				}
+			}
+		);
+
+		//Realising the connection.
+		connection.release();
+
+		// Handle error after the release.
+		if (err) console.error(err);
+
+		// Don't use the connection here, it has been returned to the pool.
+	})
+
+});
+
+app.put('/api/board/unlike', cors(), (req, res) => {
+
+	//Getting a connection from the pool
+	pool.getConnection(function(err, connection) {
+		// Not connected!
+		if (err) console.error(err);
+
+		console.log(req.body);
+		//Using the connection.
+		connection.query(
+			`UPDATE ${req.body.column} SET unlikes = unlikes + 1 WHERE id${req.body.column} = ${req.body.id}`,
+			(err) => {
+				if (err) {
+					console.error(err);
+					res.status(500).send("Error");
+				} else {
+					res.status(201).json({"message":"Successfully liked"});
+				}
+			}
+		);
+
+		//Realising the connection.
+		connection.release();
+
+		// Handle error after the release.
+		if (err) console.error(err);
+
+		// Don't use the connection here, it has been returned to the pool.
+	})
+
+});
+
+
+//UPDATE went_well SET likes = likes + 1 WHERE idwent_well = 4;
 //Serve static assets if in production.
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));

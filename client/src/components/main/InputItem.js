@@ -24,6 +24,7 @@ const InputItem = (props) => {
 		.then(props.getData());
 	};
 
+
 	return (
 		<Form onSubmit={handleOnSubmit}>
 			<label>

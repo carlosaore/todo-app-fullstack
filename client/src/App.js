@@ -8,10 +8,10 @@ function App() {
 
     function getData() {
         fetch("/api/board")
-            .then(response => response.json())
-            .then(data => {
-                setBoardItems(data)
-            })
+        .then(response => response.json())
+        .then(data => {
+            setBoardItems(data)
+        })
     }
 
     useEffect (() => {
