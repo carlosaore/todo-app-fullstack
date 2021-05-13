@@ -130,6 +130,7 @@ const Main = (props) => {
 						newItemValue={wentWellNewItem}
 						handleOnChange={handleChangeWentWellNewItem}
 						getData={props.getData}
+						setNewItemValue={setWentWellNewItem}
 					/>
 				</Item>
 			</Column>
@@ -140,13 +141,13 @@ const Main = (props) => {
 						<Item key={uuidv4()}>
 							<p>{element.text}</p>
 							<Button
-								onClick={handleLike}
+								onClick={() => handleLike( 'to_improve', element.idto_improve)}
 								value={element}
 							>
 								{`👍${element.likes}`}
 							</Button>
 							<Button
-								onClick={handleUnlike}
+								onClick={() => handleUnlike( 'to_improve', element.idto_improve)}
 								value={element}
 
 							>{`👎${element.unlikes}`}</Button>
@@ -160,6 +161,7 @@ const Main = (props) => {
 						newItemValue={toImproveNewItem}
 						handleOnChange={handleChangeToImproveNewItem}
 						getData={props.getData}
+						setNewItemValue={setToImproveNewItem}
 					/>
 				</Item>
 			</Column>
@@ -170,13 +172,13 @@ const Main = (props) => {
 						<Item key={uuidv4()}>
 							<p>{element.text}</p>
 							<Button
-								onClick={handleLike}
+								onClick={() => handleLike( 'action_items', element.idaction_items)}
 								value={element}
 							>
 								{`👍${element.likes}`}
 							</Button>
 							<Button
-								onClick={handleUnlike}
+								onClick={() => handleUnlike( 'action_items', element.idaction_items)}
 								value={element}
 							>{`👎${element.unlikes}`}</Button>
 						</Item>
@@ -189,6 +191,7 @@ const Main = (props) => {
 						newItemValue={actionItemsNewItem}
 						handleOnChange={handleChangeActionItems}
 						getData={props.getData}
+						setNewItemValue={setActionItemsNewItem}
 					/>
 				</Item>
 			</Column>

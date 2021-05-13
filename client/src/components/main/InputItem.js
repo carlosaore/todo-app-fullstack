@@ -21,7 +21,8 @@ const InputItem = (props) => {
 			}
 		}).then(res => res.json())
 		.catch(error => console.error(error))
-		.then(props.getData());
+		.then(props.getData())
+		.then(props.setNewItemValue(""))
 	};
 
 

@@ -219,7 +219,6 @@ app.put('/api/board/like', cors(), (req, res) => {
 		// Not connected!
 		if (err) console.error(err);
 
-		console.log(req.body);
 		//Using the connection.
 		connection.query(
 			`UPDATE ${req.body.column} SET likes = likes + 1 WHERE id${req.body.column} = ${req.body.id}`,
@@ -251,7 +250,6 @@ app.put('/api/board/unlike', cors(), (req, res) => {
 		// Not connected!
 		if (err) console.error(err);
 
-		console.log(req.body);
 		//Using the connection.
 		connection.query(
 			`UPDATE ${req.body.column} SET unlikes = unlikes + 1 WHERE id${req.body.column} = ${req.body.id}`,
